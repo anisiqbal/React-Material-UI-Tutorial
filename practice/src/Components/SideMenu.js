@@ -22,7 +22,7 @@ function SideMenu() {
 
     return (
      <div className={classes.sideMenu}>
-
+ho
      </div>
     )
   }
