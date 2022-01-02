@@ -1,32 +1,52 @@
 
-import { AppBar , Toolbar , Grid, InputBase, IconButton  , Badge} from "@material-ui/core";
+import { AppBar, Toolbar, Grid, InputBase, IconButton, Badge, makeStyles } from "@material-ui/core";
 import React from "react";
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+
+const useStyles = makeStyles ({
+    root:{
+        backgroundColor: '#fff'
+    }
+})
 
 function Header() {
+
+    const classes = useStyles();
+
     return (
-        <AppBar position="static">
+        <AppBar position="static" className={classes.root}>
             <Toolbar>
                 <Grid container>
-                    <Grid item sm={4} style={{border:'1px solid #fff'}}> 
-                        <InputBase/>
+                    <Grid item>
+                        <InputBase />
                     </Grid>
-
-                    <Grid item sm={8} style={{border:'1px solid #000'}}> 
+                    <Grid item sm></Grid>
+                    <Grid item>
                         <IconButton>
-                            <Badge badgeContent={4} color=" secondary">
-                                <NotificationsNoneIcon/>
+                            <Badge badgeContent={4} color="secondary">
+                                <NotificationsNoneIcon />
                             </Badge>
+                        </IconButton>
 
-                            <Badge badgeContent={4} color=" secondary">
-                                <NotificationsNoneIcon/>
+                        <IconButton>
+                            <Badge badgeContent={3} color="primary">
+                                < ChatBubbleOutlineIcon />
                             </Badge>
+                        </IconButton>
+
+
+                        <IconButton>
+
+                            <PowerSettingsNewIcon />
+
                         </IconButton>
                     </Grid>
 
 
-                        </Grid>
-                    
+                </Grid>
+
             </Toolbar>
         </AppBar>
     )
