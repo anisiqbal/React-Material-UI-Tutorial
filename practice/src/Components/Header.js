@@ -13,7 +13,7 @@ const useStyles = makeStyles ({
 
 function Header() {
 
-    const classes = useStyles();
+    const classes = useStyles(); 
 
     return (
         <AppBar position="static" className={classes.root}>
