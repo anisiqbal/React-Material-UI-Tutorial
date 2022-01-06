@@ -29,15 +29,38 @@ const initialFValues = {
 
 function EmployeeForm() {
 
+
+    // this is validation mean that before data update after then showing alert popup////
+    const validate =() =>{
+        let temp = {}
+        temp.fullName = values.fullName ? "" : "This field is required."
+        temp.email =(/$^|.+@.+..+/).test(values.email)? "" : "Email is not required."
+        temp.mobile= values.mobile.length > 9 ? "" : "Minimum 10 numbers required."
+        temp.departmentId= values.departmentId.length != 0 ? "": "This field is required."
+        setErrors({
+            ...temp
+        })
+        return Object.values(temp).every(x => x =="")
+    }
+
     const {
         values,
         setValues,
+        errors,
+        setErrors,
         handleInputChange,
     } = UseForm(initialFValues);
 
+    const handleSubmit = e =>{
+        e.preventDefault()
+      if(validate())  
+        window.alert('testing...')
+
+    }
+
     return (
 
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item xs={6}>
                     <Controls.Input
@@ -45,6 +68,7 @@ function EmployeeForm() {
                         label="Full Name"
                         value={values.fullName}
                         onChange={handleInputChange}
+                        error={errors.fullName}
                     />
 
                     <Controls.Input
@@ -53,6 +77,7 @@ function EmployeeForm() {
                         name="email"
                         value={values.email}
                         onChange={handleInputChange}
+                        error={errors.email}
                     />
 
                     <Controls.Input
@@ -61,6 +86,7 @@ function EmployeeForm() {
                         name="mobile"
                         value={values.mobile}
                         onChange={handleInputChange}
+                        error={errors.mobile}
                     />
 
                     <Controls.Input
