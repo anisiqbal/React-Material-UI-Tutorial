@@ -75,6 +75,13 @@ function EmployeeForm() {
                         options={EmployeeServices.getDepartmentCollection()}
                     />
 
+                    <Controls.Checkbox
+                        name="isPermanent"
+                        label="Permanent Employee"
+                        value={values.isPermanent}
+                        onChange={handleInputChange}
+                    />
+
 
                    
                 </Grid>
