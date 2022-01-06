@@ -1,10 +1,10 @@
-import {  Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Controls from "../../Components/Controls/Controls";
 
 import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import { UseForm, Form } from "../../Components/UseForm";
-import * as EmployeeServices from "../../Services/EmployeeServices" ;
+import * as EmployeeServices from "../../Services/EmployeeServices";
 
 
 const genderItems = [
@@ -55,6 +55,22 @@ function EmployeeForm() {
                         onChange={handleInputChange}
                     />
 
+                    <Controls.Input
+
+                        label="Mobile"
+                        name="mobile"
+                        value={values.mobile}
+                        onChange={handleInputChange}
+                    />
+
+                    <Controls.Input
+
+                        label="City"
+                        name="city"
+                        value={values.city}
+                        onChange={handleInputChange}
+                    />
+
                 </Grid>
                 <Grid item xs={6}>
 
@@ -75,6 +91,14 @@ function EmployeeForm() {
                         options={EmployeeServices.getDepartmentCollection()}
                     />
 
+
+                    <Controls.DatePicker
+                        name="hireDate"
+                        label="Hire Date"
+                        value={values.hireDate}
+                        onChange={handleInputChange}
+                    />
+
                     <Controls.Checkbox
                         name="isPermanent"
                         label="Permanent Employee"
@@ -82,8 +106,21 @@ function EmployeeForm() {
                         onChange={handleInputChange}
                     />
 
+                    <div>
+                        <Controls.Button
+                            // ye type="submit" isliye kra rahe hen q k insspect me type button show horai h//
+                            type="submit"
+                            text="Submit" />
 
-                   
+                        <Controls.Button 
+                            text="Reset" 
+                            color="default"/>
+
+                    </div>
+
+
+
+
                 </Grid>
             </Grid>
         </Form>
