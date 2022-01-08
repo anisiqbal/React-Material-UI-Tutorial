@@ -31,15 +31,20 @@ function EmployeeForm() {
 
 
     // this is validation mean that before data update after then showing alert popup////
-    const validate =() =>{
-        let temp = {}
-        temp.fullName = values.fullName ? "" : "This field is required."
-        temp.email =(/$^|.+@.+..+/).test(values.email)? "" : "Email is not required."
-        temp.mobile= values.mobile.length > 9 ? "" : "Minimum 10 numbers required."
-        temp.departmentId= values.departmentId.length != 0 ? "": "This field is required."
+    const validate = (fieldValues = values) =>{
+        let temp = {...errors}
+        if('fullName' in fieldValues)
+            temp.fullName = fieldValues.fullName ? "" : "This field is required."
+        if('email' in fieldValues)
+         temp.email =(/$^|.+@.+..+/).test(fieldValues.email)? "" : "Email is not required."
+        if('mobile' in fieldValues) 
+            temp.mobile= values.mobile.length > 9 ? "" : "Minimum 10 numbers required."
+        if('departmentId' in fieldValues)    
+        temp.departmentId=fieldValues.departmentId.length != 0 ? "": "This field is required."
         setErrors({
             ...temp
         })
+      if (fieldValues == values)  
         return Object.values(temp).every(x => x =="")
     }
 
@@ -49,7 +54,8 @@ function EmployeeForm() {
         errors,
         setErrors,
         handleInputChange,
-    } = UseForm(initialFValues);
+        resetForm,
+    } = UseForm(initialFValues, true, validate);
 
     const handleSubmit = e =>{
         e.preventDefault()
@@ -115,6 +121,7 @@ function EmployeeForm() {
                         value={values.departmentId}
                         onChange={handleInputChange}
                         options={EmployeeServices.getDepartmentCollection()}
+                        error={errors.departmentId}
                     />
 
 
@@ -140,7 +147,8 @@ function EmployeeForm() {
 
                         <Controls.Button 
                             text="Reset" 
-                            color="default"/>
+                            color="default"
+                            onClick={resetForm}/>
 
                     </div>
 

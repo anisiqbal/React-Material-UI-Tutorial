@@ -6,10 +6,10 @@ import { makeStyles } from "@material-ui/core";
 
 
 
-export function UseForm(initialFValues) {
+export function UseForm(initialFValues, validateOnChange=false, validate) {
 
     const [values, setValues] = useState(initialFValues);
-    const [errors, setErrors] = useState(initialFValues);
+    const [errors, setErrors] = useState({ });
 
     const handleInputChange = e => {
         const { name, value } = e.target
@@ -17,7 +17,17 @@ export function UseForm(initialFValues) {
             ...values,
             [name]: value
         })
+
+        if (validateOnChange)
+            validate({[name]:value})
     }
+
+    const resetForm = ()=>{
+        setValues(initialFValues);
+        setErrors({})
+    
+    }
+    
 
     return {
         values,
@@ -25,10 +35,12 @@ export function UseForm(initialFValues) {
         errors,
         setErrors,
         handleInputChange,
+        resetForm, 
     }
 
 
 }
+
 
 
 
@@ -53,4 +65,4 @@ const useStyles = makeStyles(theme =>({
     )
 }
 
-
+ 
