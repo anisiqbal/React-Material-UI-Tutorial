@@ -59,9 +59,10 @@ function EmployeeForm() {
 
     const handleSubmit = e =>{
         e.preventDefault()
-      if(validate())  
-        window.alert('testing...')
-
+      if(validate())  {
+        EmployeeServices.insertEmployee(values)
+        resetForm();
+      }
     }
 
     return (
